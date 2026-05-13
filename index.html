@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frendi AI Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -11,40 +13,63 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:'Orbitron',sans-serif;
 }
 
 body{
     background:#020617;
-    color:white;
     overflow-x:hidden;
+    color:white;
 }
 
 /* BACKGROUND */
 
 body::before{
-    content:'';
+    content:"";
     position:fixed;
-    width:100%;
-    height:100%;
-    background:
-    radial-gradient(circle at top left,#0ea5e955,transparent 25%),
-    radial-gradient(circle at bottom right,#7c3aed55,transparent 25%);
-    z-index:-1;
+    width:600px;
+    height:600px;
+    background:radial-gradient(#00d9ff33,transparent 70%);
+    top:-200px;
+    left:-200px;
+    animation:move1 8s infinite alternate;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:600px;
+    height:600px;
+    background:radial-gradient(#7b2cff33,transparent 70%);
+    bottom:-200px;
+    right:-200px;
+    animation:move2 10s infinite alternate;
+}
+
+@keyframes move1{
+    from{transform:translate(0,0);}
+    to{transform:translate(100px,100px);}
+}
+
+@keyframes move2{
+    from{transform:translate(0,0);}
+    to{transform:translate(-100px,-100px);}
 }
 
 /* CONTAINER */
 
 .container{
     width:90%;
-    max-width:900px;
+    max-width:1100px;
     margin:50px auto;
-    background:rgba(15,23,42,0.8);
-    border:1px solid rgba(56,189,248,0.2);
-    border-radius:30px;
     padding:40px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 40px rgba(56,189,248,0.2);
+    border-radius:30px;
+    background:rgba(15,23,42,0.6);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px #00d9ff22;
+    position:relative;
+    z-index:2;
 }
 
 /* PROFILE */
@@ -54,81 +79,89 @@ body::before{
 }
 
 .profile img{
-    width:140px;
-    height:140px;
+    width:170px;
+    height:170px;
     border-radius:50%;
-    border:4px solid #38bdf8;
-    box-shadow:0 0 25px #38bdf8;
-    margin-bottom:20px;
+    border:5px solid #00d9ff;
+    box-shadow:0 0 40px #00d9ff;
+    object-fit:cover;
+    animation:float 4s ease-in-out infinite;
 }
 
-.badge{
-    display:inline-block;
-    background:#0f172a;
-    border:1px solid #38bdf8;
-    color:#38bdf8;
-    padding:8px 20px;
-    border-radius:30px;
-    margin-bottom:20px;
-    font-size:14px;
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
 }
 
 h1{
+    margin-top:25px;
     font-size:55px;
-    margin-bottom:15px;
+    color:#00d9ff;
+    text-shadow:0 0 15px #00d9ff;
 }
 
-h1 span{
-    color:#38bdf8;
+.typing{
+    width:0;
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:3px solid #00d9ff;
+    margin:20px auto;
+    font-size:20px;
+    color:#ffffff;
+    animation:typing 5s steps(40,end) infinite alternate;
 }
 
-.subtitle{
-    color:#cbd5e1;
-    font-size:22px;
-    margin-bottom:30px;
+@keyframes typing{
+    from{width:0;}
+    to{width:100%;}
 }
 
-.description{
-    color:#94a3b8;
+.desc{
+    max-width:700px;
+    margin:25px auto;
     line-height:1.8;
-    margin-bottom:50px;
-    font-size:18px;
-}
-
-/* SECTION */
-
-.section-title{
-    text-align:center;
-    margin:50px 0 30px;
-    font-size:28px;
-    color:#38bdf8;
+    color:#cbd5e1;
 }
 
 /* SKILLS */
 
 .skills{
+    margin-top:60px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:35px;
+    margin-bottom:40px;
+    color:#00d9ff;
+}
+
+.skill-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
 }
 
 .skill-card{
-    background:#0f172a;
-    border:1px solid rgba(56,189,248,0.2);
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:30px;
     border-radius:20px;
-    padding:25px;
     text-align:center;
-    transition:0.3s;
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
 }
 
 .skill-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 25px rgba(56,189,248,0.4);
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 0 30px #00d9ff55;
 }
 
 .skill-card img{
-    width:70px;
-    margin-bottom:15px;
+    width:80px;
+    margin-bottom:20px;
 }
 
 .skill-card h3{
@@ -136,223 +169,139 @@ h1 span{
 }
 
 .bar{
-    background:#1e293b;
+    width:100%;
     height:10px;
+    background:#1e293b;
     border-radius:20px;
     overflow:hidden;
 }
 
-.fill{
+.bar span{
+    display:block;
     height:100%;
-    background:#38bdf8;
-}
-
-/* ABOUT */
-
-.about{
-    background:#0f172a;
-    padding:30px;
-    border-radius:20px;
-    margin-top:20px;
-    color:#cbd5e1;
-    text-align:center;
-    line-height:1.8;
-    border:1px solid rgba(56,189,248,0.2);
-}
-
-/* SOCIAL */
-
-.socials{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
-    margin-top:30px;
-}
-
-.socials a{
-    text-decoration:none;
-    background:#0f172a;
-    padding:15px;
-    border-radius:15px;
-    text-align:center;
-    color:white;
-    transition:0.3s;
-    border:1px solid rgba(56,189,248,0.2);
-}
-
-.socials a:hover{
-    background:#38bdf8;
-    color:black;
+    background:linear-gradient(to right,#00d9ff,#7b2cff);
 }
 
 /* BUTTON */
 
-.main-btn{
-    display:block;
-    width:fit-content;
-    margin:50px auto 0;
+.btn{
+    display:inline-block;
+    margin-top:50px;
     padding:18px 40px;
-    background:linear-gradient(90deg,#38bdf8,#7c3aed);
-    border-radius:15px;
+    border-radius:50px;
+    background:linear-gradient(45deg,#00d9ff,#7b2cff);
     color:white;
     text-decoration:none;
-    font-weight:bold;
-    font-size:20px;
-    transition:0.3s;
+    font-size:18px;
+    transition:0.4s;
+    box-shadow:0 0 20px #00d9ff55;
 }
 
-.main-btn:hover{
-    transform:scale(1.05);
+.btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 35px #00d9ff;
 }
 
 /* FOOTER */
 
 footer{
     text-align:center;
-    margin-top:40px;
+    margin-top:60px;
     color:#94a3b8;
+    font-size:14px;
 }
 
-/* MOBILE */
+/* RESPONSIVE */
 
 @media(max-width:768px){
 
     h1{
-        font-size:40px;
+        font-size:38px;
     }
 
-    .subtitle{
-        font-size:18px;
+    .typing{
+        font-size:15px;
     }
 
-    .description{
-        font-size:16px;
+    .container{
+        padding:25px;
     }
 
 }
 
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
     <div class="profile">
 
-        <img src="https://i.imgur.com/2DhmtJ4.png">
+        <img src="https://i.imgur.com/8Km9tLL.png">
 
-        <div class="badge">
-            AI DEVELOPER
+        <h1>Frendi AI 👋</h1>
+
+        <div class="typing">
+            AI Developer • Web Developer • Future Technology
         </div>
 
-        <h1>
-            Halo, Saya <span>Frendi</span> 👋
-        </h1>
+        <p class="desc">
+            Saya seorang developer yang fokus belajar Artificial Intelligence,
+            Web Development, dan membangun teknologi masa depan dengan desain modern futuristik.
+        </p>
 
-        <div class="subtitle">
-            Freelance Developer | Learning AI & Web Development
-        </div>
-
-        <div class="description">
-            Saya seorang developer yang passionate dengan teknologi,
-            suka belajar hal baru, dan membangun sesuatu yang bermanfaat.
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        🚀 Skill Saya
     </div>
 
     <div class="skills">
 
-        <div class="skill-card">
-            <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
-            <h3>HTML</h3>
+        <h2 class="section-title">🚀 Skills</h2>
 
-            <div class="bar">
-                <div class="fill" style="width:90%"></div>
+        <div class="skill-grid">
+
+            <div class="skill-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
+                <h3>HTML</h3>
+                <div class="bar">
+                    <span style="width:95%"></span>
+                </div>
             </div>
 
-            <br>90%
-        </div>
-
-        <div class="skill-card">
-            <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png">
-            <h3>CSS</h3>
-
-            <div class="bar">
-                <div class="fill" style="width:85%"></div>
+            <div class="skill-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png">
+                <h3>CSS</h3>
+                <div class="bar">
+                    <span style="width:90%"></span>
+                </div>
             </div>
 
-            <br>85%
-        </div>
-
-        <div class="skill-card">
-            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
-            <h3>JavaScript</h3>
-
-            <div class="bar">
-                <div class="fill" style="width:80%"></div>
+            <div class="skill-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
+                <h3>JavaScript</h3>
+                <div class="bar">
+                    <span style="width:80%"></span>
+                </div>
             </div>
 
-            <br>80%
-        </div>
-
-        <div class="skill-card">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png">
-            <h3>GitHub</h3>
-
-            <div class="bar">
-                <div class="fill" style="width:90%"></div>
+            <div class="skill-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png">
+                <h3>GitHub</h3>
+                <div class="bar">
+                    <span style="width:88%"></span>
+                </div>
             </div>
 
-            <br>90%
         </div>
 
     </div>
 
-    <div class="section-title">
-        📂 Tentang Saya
-    </div>
-
-    <div class="about">
-        Saat ini saya fokus belajar Artificial Intelligence,
-        Web Development, dan membangun project-project keren
-        untuk masa depan.
-    </div>
-
-    <div class="socials">
-
-        <a href="https://github.com/frendi-dev">
-            GitHub
+    <center>
+        <a href="https://github.com/frendi-dev" class="btn">
+            🚀 Visit My GitHub
         </a>
-
-        <a href="#">
-            Instagram
-        </a>
-
-        <a href="#">
-            WhatsApp
-        </a>
-
-        <a href="#">
-            Email
-        </a>
-
-    </div>
-
-    <a class="main-btn"
-    href="https://github.com/frendi-dev">
-
-        🚀 Kunjungi GitHub Saya
-
-    </a>
+    </center>
 
     <footer>
-        <br><br>
-        © 2024 Frendi AI. All rights reserved.
+        © 2024 Frendi AI | Futuristic Portfolio
     </footer>
 
 </div>
