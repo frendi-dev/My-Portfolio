@@ -249,18 +249,25 @@ const data = await response.json();
 console.log(data);
 
 if(data.candidates){
-let text = data.candidates[0].content.parts[0].text;
+let text =
+data.candidates[0].content.parts[0].text;
+
 let i = 0;
 
 responseDiv.innerHTML = "";
 
 let typing = setInterval(() => {
+
 responseDiv.innerHTML += text.charAt(i);
+
 i++;
 
 if(i >= text.length){
+
 clearInterval(typing);
+
 }
+
 }, 20);
 }else{
 responseDiv.innerHTML =
