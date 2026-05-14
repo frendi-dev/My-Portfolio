@@ -122,12 +122,26 @@ color:black;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
+animation: glow 2s infinite;
 }
 
 button:hover{
 transform:scale(1.03);
 }
 
+  @keyframes glow{
+0%{
+box-shadow:0 0 5px cyan;
+}
+
+50%{
+box-shadow:0 0 20px cyan;
+}
+
+100%{
+box-shadow:0 0 5px cyan;
+}
+}
 #response{
 margin-top:20px;
 background:#111827;
@@ -235,8 +249,19 @@ const data = await response.json();
 console.log(data);
 
 if(data.candidates){
-responseDiv.innerHTML =
-data.candidates[0].content.parts[0].text;
+let text = data.candidates[0].content.parts[0].text;
+let i = 0;
+
+responseDiv.innerHTML = "";
+
+let typing = setInterval(() => {
+responseDiv.innerHTML += text.charAt(i);
+i++;
+
+if(i >= text.length){
+clearInterval(typing);
+}
+}, 20);
 }else{
 responseDiv.innerHTML =
 "⚠️ AI sedang sibuk, coba lagi beberapa saat.";
