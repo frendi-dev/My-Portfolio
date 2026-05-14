@@ -232,10 +232,15 @@ text:question
 
 const data = await response.json();
 
-const answer =
-data.candidates[0].content.parts[0].text;
+console.log(data);
 
-responseDiv.innerHTML = answer;
+if(data.candidates){
+responseDiv.innerHTML =
+data.candidates[0].content.parts[0].text;
+}else{
+responseDiv.innerHTML =
+"Error: " + JSON.stringify(data);
+}
 
 }
 
